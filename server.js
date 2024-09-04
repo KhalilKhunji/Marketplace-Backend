@@ -60,7 +60,34 @@ app.post("/signin", async (req, res) => {
   }
 });
 
-  
+// Item routes
+
+// Create an item
+app.post(":userid/item", async (req,res) => {
+ pass
+});
+
+// list items
+app.get(":userId/item", async (req,res) => {
+  pass
+ });
+
+// list items
+app.get(":userId/item/:itemId", async (req,res) => {
+  pass
+ });
+
+// Update an item
+app.put(":userId/item/:itemId", async (req,res) => {
+  pass
+ });
+
+// Delete an item
+app.delete(":userId/item/:itemId", async (req,res) => {
+  pass
+ });
+
+
 // Startng the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
