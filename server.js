@@ -12,6 +12,13 @@ const morgan = require("morgan");
 app.use(morgan("dev"));
 const database = require("./config/database");
 
+// Importing user model
+const User = require("./models/userModel");
+
+app.get("/", (req, res) => {
+  res.send("Server is connected");
+});
+
 // Startng the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
