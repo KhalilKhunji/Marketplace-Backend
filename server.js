@@ -34,6 +34,24 @@ app.post("/signin", authenticationControllers.signin);
 const authenticateToken = require("./middleware/authenticateToken");
 app.use(authenticateToken);
 
+// Profile routes
+
+// Get a specific profile
+app.get("/:userId/profile/:profileId", async (req, res) => {
+  pass
+});
+
+// Update a profile
+app.put("/:userId/profile/:profileId", async (req, res) => {
+  pass
+});
+
+// Delete a profile
+app.delete("/:userId/profile/:profileId", async (req, res) => {
+  pass
+});
+
+
 // Item routes
 
 // Create an item
@@ -46,7 +64,7 @@ app.get(":userId/item", async (req,res) => {
   pass
  });
 
-// list items
+// Get a specific item
 app.get(":userId/item/:itemId", async (req,res) => {
   pass
  });
