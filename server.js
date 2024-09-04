@@ -38,77 +38,114 @@ app.use(authenticateToken);
 
 // Get a specific profile
 app.get("/:userId/profile/:profileId", async (req, res) => {
-  pass
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
 });
 
 // Update a profile
 app.put("/:userId/profile/:profileId", async (req, res) => {
-  pass
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
 });
 
 // Delete a profile
 app.delete("/:userId/profile/:profileId", async (req, res) => {
-  pass
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
 });
-
 
 // Item routes
 
 // Create an item
-app.post("/:userid/item", async (req,res) => {
- pass
+app.post("/:userid/item", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
 });
 
 // list items
-app.get("/:userId/item", async (req,res) => {
-  pass
- });
+app.get("/:userId/item", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
 // Get a specific item
-app.get("/:userId/item/:itemId", async (req,res) => {
-  pass
- });
+app.get("/:userId/item/:itemId", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
 // Update an item
-app.put("/:userId/item/:itemId", async (req,res) => {
-  pass
- });
+app.put("/:userId/item/:itemId", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
 // Delete an item
-app.delete("/:userId/item/:itemId", async (req,res) => {
-  pass
- });
+app.delete("/:userId/item/:itemId", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
 // comment routes
 
 // Create a comment
-app.post("/:userId/item/:itemId/comment", async (req,res) => {
-  pass
- });
- 
- // list comments
- app.get("/:userId/item/:itemId/comment", async (req,res) => {
-   pass
-  });
- 
- // Get a specific comment
- app.get("/:userId/item/:itemId/comment/:commentId", async (req,res) => {
-   pass
-  });
- 
- // Edit a comment
- app.put("/:userId/item/:itemId/comment/:commentId", async (req,res) => {
-   pass
-  });
- 
- // Delete a comment
- app.delete("/:userId/item/:itemId/comment/:commentId", async (req,res) => {
-   pass
-  });
+app.post("/:userId/item/:itemId/comment", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
+// list comments
+app.get("/:userId/item/:itemId/comment", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+// Get a specific comment
+app.get("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+// Edit a comment
+app.put("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+// Delete a comment
+app.delete("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
 
 // Startng the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});
+}); 
