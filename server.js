@@ -52,8 +52,6 @@ app.delete("/user/:userId/item/:itemId", itemControllers.deleteItem);
 // Comment routes
 const commentControllers = require("./controllers/commentControllers");
 app.post("/user/:userId/item/:itemId/comments", commentControllers.create);
-app.get("/user/:userId/item/:itemId/comments", commentControllers.index);
-app.get("/user/:userId/item/:itemId/comments/:commentId", commentControllers.show);
 app.put("/user/:userId/item/:itemId/comments/:commentId", commentControllers.update);
 app.delete("/user/:userId/item/:itemId/comments/:commentId", commentControllers.remove);
 
