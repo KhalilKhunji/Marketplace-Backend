@@ -3,37 +3,36 @@ const mongoose = require("mongoose");
 const itemSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   category: {
     type: String,
     enum: ["Books", "Clothes", "Electronics", "Personal Care", "Food"],
-    required: true
+    required: true,
   },
   price: {
     type: Number,
-    required: true
+    required: true,
   },
   image: {
     type: String,
-    default: null
+    default: null,
   },
   seller: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: "User",
+    required: true,
   },
   buyer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    default: null
-  }
+    ref: "User",
+    default: null,
+  },
 });
 
 const Item = mongoose.model("Item", itemSchema);
-
 module.exports = Item;

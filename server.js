@@ -18,6 +18,9 @@ const User = require("./models/userModel");
 // Importing item model
 const Item = require("./models/itemModel")
 
+// Importing profile model
+const Profile = require("./models/profileModel")
+
 app.get("/", (req, res) => {
   res.send("Server is connected");
 });
