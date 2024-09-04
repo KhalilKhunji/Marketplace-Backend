@@ -54,11 +54,21 @@ app.post("/signin", async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "User does not exist or invalid credentials" });
     }
-    return res.status(200).json({ message: "Signin successful" });
+    const payload = {
+      id: user._id,
+      username: user.username,
+    };
+    const accessToken = jwt.sign(payload, process.env.JWT_SECRET);
+    return res.status(200).json({ message: "Signin successful", accessToken: accessToken });
   } catch (error) {
-    return res.status(500).json({ message: "Error" });
+    console.log(error)
+    return res.status(500).json({ message: "Error"});
   }
 });
+
+// JWT route protection middleware
+const authenticateToken = require("./middleware/authenticateToken");
+app.use(authenticateToken);
 
 // Item routes
 
