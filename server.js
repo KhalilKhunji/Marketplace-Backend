@@ -15,6 +15,9 @@ const database = require("./config/database");
 // Importing user model
 const User = require("./models/userModel");
 
+// Importing item model
+const Item = require("./models/itemModel")
+
 app.get("/", (req, res) => {
   res.send("Server is connected");
 });
