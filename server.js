@@ -104,6 +104,8 @@ app.put("/user/:userId/item/:itemId", async (req, res) => {
 app.delete("/user/:userId/item/:itemId", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
+    const item = await Item.findByIdAndDelete(req.params.itemId)
+    res.status(200).json({ item: item });
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
