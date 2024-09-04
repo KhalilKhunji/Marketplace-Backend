@@ -40,77 +40,14 @@ app.get("/user/:userId/profile", profileControllers.show);
 app.put("/user/:userId/profile", profileControllers.update);
 
 // Item routes
-// Create an item
-app.post("/user/:userId/item", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-    try {
-      const item = await Item.create({
-        name: req.body.name,
-        description: req.body.description,
-        category: req.body.category,
-        price : req.body.price,
-        seller: req.params.userId
-      });
-      res.status(200).json({ item: item });
-    } catch (error) {
-      console.log(error)
-      res.status(500).json({ error: "Server Error" });
-    }
-  }
-});
-
+const itemControllers = require("./controllers/itemControllers");
+app.post("/user/:userId/item", itemControllers.create );
 // list of all items
-app.get("/user/:userId/item", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-    const items = await Item.find();
-    res.status(200).json({ items: items });
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
-
+app.get("/user/:userId/item", itemControllers.index);
 // Get a specific item
-app.get("/user/:userId/item/:itemId", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-    const item = await Item.find({_id: req.params.itemId});
-    res.status(200).json({ item: item });
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
-
-// Update an item
-app.put("/user/:userId/item/:itemId", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-    const item = await Item.findByIdAndUpdate(req.params.itemId,{
-      name: req.body.name,
-      description: req.body.description,
-      category: req.body.category,
-      price : req.body.price,
-    }, { new: true});
-    res.status(200).json({ item: item });
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
-
-// Delete an item
-app.delete("/user/:userId/item/:itemId", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-    const item = await Item.findByIdAndDelete(req.params.itemId)
-    res.status(200).json({ item: item });
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
+app.get("/user/:userId/item/:itemId", itemControllers.show);
+app.put("/user/:userId/item/:itemId", itemControllers.update);
+app.delete("/user/:userId/item/:itemId", itemControllers.deleteItem);
 
 // comment routes
 
