@@ -37,12 +37,16 @@ app.use(authenticateToken);
 // Profile routes
 
 // Get a specific profile
-app.get("/:userId/profile/:profileId", async (req, res) => {
+app.get("/:userId/profile", async (req, res) => {
+  console.log(req.user.id === req.params.userId);
   if(String(req.user.id) === req.params.userId){
-  try {
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
+    try {
+      const profile = await Profile.find({owner: req.params.userId})
+      res.status(200).json({ profile: profile });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Server Error" });
+    }
 }
 });
 
@@ -72,6 +76,7 @@ app.delete("/:userId/profile/:profileId", async (req, res) => {
 app.post("/:userId/item", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
     try {
+      
     } catch (error) {
       res.status(500).json({ error: "Server Error" });
     }
