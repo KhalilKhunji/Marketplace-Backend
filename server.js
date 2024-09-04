@@ -49,59 +49,16 @@ app.get("/user/:userId/item/:itemId", itemControllers.show);
 app.put("/user/:userId/item/:itemId", itemControllers.update);
 app.delete("/user/:userId/item/:itemId", itemControllers.deleteItem);
 
-// comment routes
+// Comment routes
+const commentControllers = require("./controllers/commentControllers");
+app.post("/user/:userId/item/:itemId/comments", commentControllers.create);
+app.get("/user/:userId/item/:itemId/comments", commentControllers.index);
+app.get("/user/:userId/item/:itemId/comments/:commentId", commentControllers.show);
+app.put("/user/:userId/item/:itemId/comments/:commentId", commentControllers.update);
+app.delete("/user/:userId/item/:itemId/comments/:commentId", commentControllers.remove);
 
-// Create a comment
-app.post("/user/:userId/item/:itemId/comment", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
 
-// list comments
-app.get("/user/:userId/item/:itemId/comment", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
-
-// Get a specific comment
-app.get("/user/:userId/item/:itemId/comment/:commentId", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
-
-// Edit a comment
-app.put("/user/:userId/item/:itemId/comment/:commentId", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
-
-// Delete a comment
-app.delete("/user/:userId/item/:itemId/comment/:commentId", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
-
-// Startng the server
+// Starting the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
