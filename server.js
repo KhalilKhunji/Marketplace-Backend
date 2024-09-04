@@ -38,110 +38,136 @@ app.use(authenticateToken);
 
 // Get a specific profile
 app.get("/:userId/profile/:profileId", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Update a profile
 app.put("/:userId/profile/:profileId", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Delete a profile
 app.delete("/:userId/profile/:profileId", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Item routes
 
 // Create an item
-app.post("/:userid/item", async (req, res) => {
-  try {
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
+app.post("/:userId/item", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
+    try {
+    } catch (error) {
+      res.status(500).json({ error: "Server Error" });
+    }
   }
 });
 
 // list items
 app.get("/:userId/item", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Get a specific item
 app.get("/:userId/item/:itemId", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Update an item
 app.put("/:userId/item/:itemId", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Delete an item
 app.delete("/:userId/item/:itemId", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // comment routes
 
 // Create a comment
 app.post("/:userId/item/:itemId/comment", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // list comments
 app.get("/:userId/item/:itemId/comment", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Get a specific comment
 app.get("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Edit a comment
 app.put("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Delete a comment
 app.delete("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
+  if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
+}
 });
 
 // Startng the server

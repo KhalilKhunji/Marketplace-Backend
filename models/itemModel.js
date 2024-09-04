@@ -32,7 +32,7 @@ const itemSchema = new mongoose.Schema({
     ref: "User",
     default: null,
   },
-});
+}, { timestamps: true });
 
 const Item = mongoose.model("Item", itemSchema);
 module.exports = Item;

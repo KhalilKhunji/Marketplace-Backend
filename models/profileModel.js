@@ -18,7 +18,7 @@ const profileSchema = new mongoose.Schema({
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Item" }],
     default: [],
   },
-});
+}, { timestamps: true });
 
 const Profile = mongoose.model("Profile", profileSchema);
 module.exports = Profile;
