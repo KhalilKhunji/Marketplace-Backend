@@ -33,9 +33,14 @@ const update = async (req, res) => {
 // Delete a comment
 const remove = async (req, res) => {
   try {
+    const item = await Item.findById(req.params.itemId);
+    if (!item) return res.status(404).json({error: "Not Found"});
+    item.comments.remove({ id: req.params.commentId });
+    await item.save();
+    res.status(200).json(item.comments);
   } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
+    res.status(500).json({ error: "Unprocessable Content" });
+  };
 };
 
 module.exports = { create, update, remove };
