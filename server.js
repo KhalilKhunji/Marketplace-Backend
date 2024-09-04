@@ -16,13 +16,36 @@ const database = require("./config/database");
 const User = require("./models/userModel");
 
 // Importing item model
-const Item = require("./models/itemModel")
+const Item = require("./models/itemModel");
 
 // Importing profile model
-const Profile = require("./models/profileModel")
+const Profile = require("./models/profileModel");
 
 app.get("/", (req, res) => {
   res.send("Server is connected");
+});
+
+// Authentication routes
+
+app.post("/signup", async (req, res) => {
+  const existingUser = await User.findOne({ username: req.body.username });
+  if (existingUser) {
+    return res.status(400).json({ message: "User already exists" });
+  }
+  const hashedPassword = await bcrypt.hash(
+    req.body.password,
+    Number(process.env.SALT_ROUNDS) || 10,
+  );
+  const user = await User.create({
+    username: req.body.username,
+    password: hashedPassword,
+  });
+  await Profile.create({ owner: user._id, address: req.body.address });
+  res.status(201).json({ message: "User created" });
+});
+
+app.post("/signin", (req, res) => {
+  res.send("Sign in");
 });
 
 // Startng the server
