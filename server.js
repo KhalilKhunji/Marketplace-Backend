@@ -55,29 +55,56 @@ app.delete("/:userId/profile/:profileId", async (req, res) => {
 // Item routes
 
 // Create an item
-app.post(":userid/item", async (req,res) => {
+app.post("/:userid/item", async (req,res) => {
  pass
 });
 
 // list items
-app.get(":userId/item", async (req,res) => {
+app.get("/:userId/item", async (req,res) => {
   pass
  });
 
 // Get a specific item
-app.get(":userId/item/:itemId", async (req,res) => {
+app.get("/:userId/item/:itemId", async (req,res) => {
   pass
  });
 
 // Update an item
-app.put(":userId/item/:itemId", async (req,res) => {
+app.put("/:userId/item/:itemId", async (req,res) => {
   pass
  });
 
 // Delete an item
-app.delete(":userId/item/:itemId", async (req,res) => {
+app.delete("/:userId/item/:itemId", async (req,res) => {
   pass
  });
+
+// comment routes
+
+// Create a comment
+app.post("/:userId/item/:itemId/comment", async (req,res) => {
+  pass
+ });
+ 
+ // list comments
+ app.get("/:userId/item/:itemId/comment", async (req,res) => {
+   pass
+  });
+ 
+ // Get a specific comment
+ app.get("/:userId/item/:itemId/comment/:commentId", async (req,res) => {
+   pass
+  });
+ 
+ // Edit a comment
+ app.put("/:userId/item/:itemId/comment/:commentId", async (req,res) => {
+   pass
+  });
+ 
+ // Delete a comment
+ app.delete("/:userId/item/:itemId/comment/:commentId", async (req,res) => {
+   pass
+  });
 
 
 // Startng the server
