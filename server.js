@@ -38,22 +38,26 @@ app.use(authenticateToken);
 
 // Get a specific profile
 app.get("/:userId/profile", async (req, res) => {
-  console.log(req.user.id === req.params.userId);
   if(String(req.user.id) === req.params.userId){
     try {
       const profile = await Profile.find({owner: req.params.userId})
       res.status(200).json({ profile: profile });
     } catch (error) {
-      console.log(error);
       res.status(500).json({ error: "Server Error" });
     }
 }
 });
 
 // Update a profile
-app.put("/:userId/profile/:profileId", async (req, res) => {
+app.put("/:userId/profile", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
+    const profile = await Profile.findOne({owner: req.params.userId});
+    if (!profile) {
+      return res.status(404).json({ error: "Profile not found" });
+    }
+    const updatedProfile = await Profile.findByIdAndUpdate(profile._id, {address: req.body.address},  { new: true});
+    res.status(200).json({ profile: updatedProfile });
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
