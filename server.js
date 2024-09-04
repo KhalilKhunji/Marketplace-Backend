@@ -36,32 +36,32 @@ app.use(authenticateToken);
 
 // Profile routes
 const profileControllers = require("./controllers/profileControllers");
-app.get("/:userId/profile", profileControllers.show);
-app.put("/:userId/profile", profileControllers.update);
-// Delete a profile (Can be used to clear history of items bought or items sold)
-app.delete("/:userId/profile/:profileId", async (req, res) => {
-  if(String(req.user.id) === req.params.userId){
-  try {
-  } catch (error) {
-    res.status(500).json({ error: "Server Error" });
-  }
-}
-});
+app.get("/user/:userId/profile", profileControllers.show);
+app.put("/user/:userId/profile", profileControllers.update);
 
 // Item routes
 // Create an item
-app.post("/:userId/item", async (req, res) => {
+app.post("/user/:userId/item", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
     try {
-      
+      const item = await Item.create({
+        name: req.body.name,
+        description: req.body.description,
+        category: req.body.category,
+        price : req.body.price,
+        seller: req.params.userId
+      });
+      console.log(item)
+      res.status(200).json({ item: item });
     } catch (error) {
+      console.log(error)
       res.status(500).json({ error: "Server Error" });
     }
   }
 });
 
 // list items
-app.get("/:userId/item", async (req, res) => {
+app.get("/user/:userId/item", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
@@ -71,7 +71,7 @@ app.get("/:userId/item", async (req, res) => {
 });
 
 // Get a specific item
-app.get("/:userId/item/:itemId", async (req, res) => {
+app.get("/user/:userId/item/:itemId", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
@@ -81,7 +81,7 @@ app.get("/:userId/item/:itemId", async (req, res) => {
 });
 
 // Update an item
-app.put("/:userId/item/:itemId", async (req, res) => {
+app.put("/user/:userId/item/:itemId", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
@@ -91,7 +91,7 @@ app.put("/:userId/item/:itemId", async (req, res) => {
 });
 
 // Delete an item
-app.delete("/:userId/item/:itemId", async (req, res) => {
+app.delete("/user/:userId/item/:itemId", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
@@ -103,7 +103,7 @@ app.delete("/:userId/item/:itemId", async (req, res) => {
 // comment routes
 
 // Create a comment
-app.post("/:userId/item/:itemId/comment", async (req, res) => {
+app.post("/user/:userId/item/:itemId/comment", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
@@ -113,7 +113,7 @@ app.post("/:userId/item/:itemId/comment", async (req, res) => {
 });
 
 // list comments
-app.get("/:userId/item/:itemId/comment", async (req, res) => {
+app.get("/user/:userId/item/:itemId/comment", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
@@ -123,7 +123,7 @@ app.get("/:userId/item/:itemId/comment", async (req, res) => {
 });
 
 // Get a specific comment
-app.get("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
+app.get("/user/:userId/item/:itemId/comment/:commentId", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
@@ -133,7 +133,7 @@ app.get("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
 });
 
 // Edit a comment
-app.put("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
+app.put("/user/:userId/item/:itemId/comment/:commentId", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {
@@ -143,7 +143,7 @@ app.put("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
 });
 
 // Delete a comment
-app.delete("/:userId/item/:itemId/comment/:commentId", async (req, res) => {
+app.delete("/user/:userId/item/:itemId/comment/:commentId", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
   } catch (error) {

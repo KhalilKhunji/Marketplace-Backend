@@ -20,7 +20,7 @@ const itemSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: null,
+    default: "https://www.svgrepo.com/show/508699/landscape-placeholder.svg",
   },
   seller: {
     type: mongoose.Schema.Types.ObjectId,
