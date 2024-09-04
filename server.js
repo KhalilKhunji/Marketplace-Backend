@@ -51,7 +51,6 @@ app.post("/user/:userId/item", async (req, res) => {
         price : req.body.price,
         seller: req.params.userId
       });
-      console.log(item)
       res.status(200).json({ item: item });
     } catch (error) {
       console.log(error)
@@ -60,10 +59,12 @@ app.post("/user/:userId/item", async (req, res) => {
   }
 });
 
-// list items
+// list of all items
 app.get("/user/:userId/item", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
+    const items = await Item.find();
+    res.status(200).json({ items: items });
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
@@ -74,6 +75,8 @@ app.get("/user/:userId/item", async (req, res) => {
 app.get("/user/:userId/item/:itemId", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
+    const item = await Item.find({_id: req.params.itemId});
+    res.status(200).json({ item: item });
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
@@ -84,6 +87,13 @@ app.get("/user/:userId/item/:itemId", async (req, res) => {
 app.put("/user/:userId/item/:itemId", async (req, res) => {
   if(String(req.user.id) === req.params.userId){
   try {
+    const item = await Item.findByIdAndUpdate(req.params.itemId,{
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price : req.body.price,
+    }, { new: true});
+    res.status(200).json({ item: item });
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
