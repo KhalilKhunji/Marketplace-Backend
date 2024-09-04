@@ -1,5 +1,17 @@
 const mongoose = require("mongoose");
 
+const commentSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: true
+  },
+  poster: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  }
+}, {timestamps: true})
+
 const itemSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -32,6 +44,7 @@ const itemSchema = new mongoose.Schema({
     ref: "User",
     default: null,
   },
+  comments: [commentSchema]
 }, { timestamps: true });
 
 const Item = mongoose.model("Item", itemSchema);
