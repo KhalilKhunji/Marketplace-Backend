@@ -22,9 +22,13 @@ const update = async (req, res) => {
     const item = await Item.findById(req.params.itemId);
     if (!item) return res.status(404).json({error: "Not Found"});
     const comment = item.comments.id(req.params.commentId);
-    comment.content = req.body.content;
-    await item.save();
-    res.status(200).json(comment);
+    if (String(comment.poster) === req.user.id) {
+      comment.content = req.body.content;
+      await item.save();
+      res.status(200).json(comment);
+    } else {
+      res.status(500).json({ error: "Server Error "});
+    }
   } catch (error) {
     res.status(422).json({ error: "Unprocessable Content" });
   }
@@ -35,9 +39,14 @@ const remove = async (req, res) => {
   try {
     const item = await Item.findById(req.params.itemId);
     if (!item) return res.status(404).json({error: "Not Found"});
-    item.comments.remove({ id: req.params.commentId });
-    await item.save();
-    res.status(200).json(item.comments);
+    const comment = item.comments.id(req.params.commentId);
+    if (String(comment.poster) === req.user.id) {
+      item.comments.remove(comment);
+      await item.save();
+      res.status(200).json(comment);
+    } else {
+      res.status(500).json({ error: "Server Error "});
+    };
   } catch (error) {
     res.status(500).json({ error: "Unprocessable Content" });
   };
