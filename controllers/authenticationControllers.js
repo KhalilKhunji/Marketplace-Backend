@@ -37,7 +37,7 @@ const signin = async (req, res) => {
         username: user.username,
       };
       const accessToken = jwt.sign(payload, process.env.JWT_SECRET);
-      return res.status(200).json({ message: "Signin successful", accessToken: accessToken, id: user._id });
+      return res.status(200).json({ message: "Signin successful", token: accessToken, id: user._id });
     } catch (error) {
       console.log(error)
       return res.status(500).json({ message: "Error"});
