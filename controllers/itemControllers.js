@@ -9,7 +9,7 @@ const create = async (req, res) => {
           description: req.body.description,
           category: req.body.category,
           price : req.body.price,
-          seller: req.params.userId
+          seller: req.params.userId,
         });
         res.status(200).json({ item: item });
       } catch (error) {
@@ -49,6 +49,7 @@ const update = async (req, res) => {
         description: req.body.description,
         category: req.body.category,
         price : req.body.price,
+        buyer: req.body.buyer
       }, { new: true});
       res.status(200).json({ item: item });
     } catch (error) {
