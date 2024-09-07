@@ -33,7 +33,7 @@ const index = async (req, res) => {
 const show =  async (req, res) => {
     if(String(req.user.id) === req.params.userId){
     try {
-      const item = await Item.find({_id: req.params.itemId});
+      const item = await Item.find({_id: req.params.itemId}).populate('comments.poster');
       res.status(200).json({ item: item });
     } catch (error) {
       res.status(500).json({ error: "Server Error" });
