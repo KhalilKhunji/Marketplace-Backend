@@ -51,6 +51,9 @@ app.post("/user/:userId/item/:itemId/comments", commentControllers.create);
 app.put("/user/:userId/item/:itemId/comments/:commentId", commentControllers.update);
 app.delete("/user/:userId/item/:itemId/comments/:commentId", commentControllers.remove);
 
+// Contact form route
+const contactControllers = require("./controllers/contactControllers");
+app.post("/contact", contactControllers.create);
 
 // Starting the server
 const PORT = process.env.PORT || 3000;
