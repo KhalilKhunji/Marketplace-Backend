@@ -55,6 +55,14 @@ app.delete("/user/:userId/item/:itemId/comments/:commentId", commentControllers.
 const contactControllers = require("./controllers/contactControllers");
 app.post("/contact", contactControllers.create);
 
+//history routes
+const historyControllers = require("./controllers/historyControllers");
+app.get("/user/:userId/profile/:profileId/history", historyControllers.show);
+
+// Wishlist routes
+const wishlistControllers = require("./controllers/wishlistControllers");
+app.use("/profile", wishlistControllers);
+
 // Starting the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
