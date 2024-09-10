@@ -3,19 +3,23 @@ const Item = require("../models/itemModel");
 
 const show = async (req, res) => {
   try {
-    const profile = await Profile.findById(req.params.profileId);
+    const { userId, profileId } = req.params; // Destructure params
+    console.log("UserId:", userId);
+    console.log("ProfileId:", profileId);
+
+    const profile = await Profile.findById(profileId);
     if (!profile) {
       return res.status(404).json({ error: "Profile not found" });
     }
 
-    const userId = profile.owner;
+    const ownerId = profile.owner;
 
     // Find bought items (where user is the buyer)
-    const boughtItems = await Item.find({ buyer: userId }).populate("seller");
+    const boughtItems = await Item.find({ buyer: ownerId }).populate("seller");
 
     // Find sold items (where user is the seller and buyer is not null)
     const soldItems = await Item.find({
-      seller: userId,
+      seller: ownerId,
       buyer: { $ne: null },
     }).populate("buyer");
 

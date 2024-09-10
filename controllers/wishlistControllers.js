@@ -30,6 +30,20 @@ router.post("/:profileId/wishlist", async (req, res) => {
   }
 });
 
+router.get("/:profileId/wishlist", async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.profileId).populate(
+      "wishlist.item"
+    );
+    if (!profile) {
+      return res.status(404).json({ error: "Profile not found" });
+    }
+    res.status(200).json({ wishlist: profile.wishlist });
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
 router.delete("/:profileId/wishlist/:wishlistId", async (req, res) => {
   try {
     const profile = await Profile.findById(req.params.profileId);
