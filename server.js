@@ -64,16 +64,13 @@ app.post("/user/:userId/item", upload.single("image"), itemControllers.create);
 app.get("/user/:userId/item", itemControllers.index);
 // Get a specific item
 app.get("/user/:userId/item/:itemId", itemControllers.show);
-app.put("/user/:userId/item/:itemId", itemControllers.update);
+app.put("/user/:userId/item/:itemId", upload.single("image"), itemControllers.update);
 app.delete("/user/:userId/item/:itemId", itemControllers.deleteItem);
 
 // Comment routes
 const commentControllers = require("./controllers/commentControllers");
 app.post(
-  "/user/:userId/item/:itemId/comments",
-  upload.single("image"),
-  commentControllers.create
-);
+  "/user/:userId/item/:itemId/comments", commentControllers.create);
 app.put(
   "/user/:userId/item/:itemId/comments/:commentId",
   commentControllers.update

@@ -4,7 +4,6 @@ const Item = require("../models/itemModel");
 const create = async (req, res) => {
   if (String(req.user.id) === req.params.userId) {
     try {
-      console.log("req.file ljdlkjdlkfjdlkjflkdj", req.file);
       const item = await Item.create({
         name: req.body.name,
         description: req.body.description,
@@ -56,6 +55,7 @@ const update = async (req, res) => {
           category: req.body.category,
           price: req.body.price,
           buyer: req.body.buyer,
+          image: req.file.location,
         },
         { new: true }
       );
