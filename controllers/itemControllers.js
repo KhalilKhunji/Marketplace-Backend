@@ -49,13 +49,15 @@ const update = async (req, res) => {
       if (!item) {
         return res.status(404).json({ error: "Item not found" });
       }
-      if (item.buyer === null) {
-        await Item.findByIdAndUpdate(
-          req.params.itemId,
-          { buyer: req.user.id },
-          { new: true },
-        );
-      }
+      if(String(item.seller) !== req.user.id ){
+        if (item.buyer === null) {
+          await Item.findByIdAndUpdate(
+            req.params.itemId,
+            { buyer: req.user.id },
+            { new: true },
+          );
+        }
+    }
       if (req.body.name) {
         await Item.findByIdAndUpdate(
           req.params.itemId,
