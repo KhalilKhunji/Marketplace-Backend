@@ -35,9 +35,31 @@ const profileControllers = require("./controllers/profileControllers");
 app.get("/user/:userId/profile", profileControllers.show);
 app.put("/user/:userId/profile", profileControllers.update);
 
+const multer = require("multer");
+const multerS3 = require("multer-s3");
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+
+const s3Client = new S3Client({
+  region: "us-east-1", // Replace with your preferred region
+  credentials: {
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  },
+});
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3Client,
+    bucket: "testingmarketplace",
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString() + "-" + file.originalname);
+    },
+  }),
+});
+
 // Item routes
 const itemControllers = require("./controllers/itemControllers");
-app.post("/user/:userId/item", itemControllers.create );
+app.post("/user/:userId/item", upload.single("image"), itemControllers.create);
 // list of all items
 app.get("/user/:userId/item", itemControllers.index);
 // Get a specific item
@@ -47,9 +69,19 @@ app.delete("/user/:userId/item/:itemId", itemControllers.deleteItem);
 
 // Comment routes
 const commentControllers = require("./controllers/commentControllers");
-app.post("/user/:userId/item/:itemId/comments", commentControllers.create);
-app.put("/user/:userId/item/:itemId/comments/:commentId", commentControllers.update);
-app.delete("/user/:userId/item/:itemId/comments/:commentId", commentControllers.remove);
+app.post(
+  "/user/:userId/item/:itemId/comments",
+  upload.single("image"),
+  commentControllers.create
+);
+app.put(
+  "/user/:userId/item/:itemId/comments/:commentId",
+  commentControllers.update
+);
+app.delete(
+  "/user/:userId/item/:itemId/comments/:commentId",
+  commentControllers.remove
+);
 
 // Contact form route
 const contactControllers = require("./controllers/contactControllers");
@@ -67,4 +99,4 @@ app.use("/profile", wishlistControllers);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-}); 
+});
