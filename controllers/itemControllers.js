@@ -23,7 +23,7 @@ const create = async (req, res) => {
 const index = async (req, res) => {
   if (String(req.user.id) === req.params.userId) {
     try {
-      const items = await Item.find();
+      const items = await Item.find().populate("buyer").populate("seller");
       res.status(200).json({ items: items });
     } catch (error) {
       res.status(500).json({ error: "Server Error" });
@@ -34,9 +34,7 @@ const index = async (req, res) => {
 const show = async (req, res) => {
   if (String(req.user.id) === req.params.userId) {
     try {
-      const item = await Item.find({ _id: req.params.itemId }).populate(
-        "comments.poster"
-      );
+      const item = await Item.find({ _id: req.params.itemId }).populate("comments.poster").populate("buyer").populate("seller");
       res.status(200).json({ item: item });
     } catch (error) {
       res.status(500).json({ error: "Server Error" });
@@ -55,7 +53,6 @@ const update = async (req, res) => {
           category: req.body.category,
           price: req.body.price,
           buyer: req.body.buyer,
-          image: req.file.location,
         },
         { new: true }
       );
