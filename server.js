@@ -1,26 +1,15 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+require("./config/database");
+
 const app = express();
 app.use(express.json());
 
-const cors = require("cors");
-
-const corsOptions = {
-  origin: 'https://marketplace-frontend-ecru-seven.vercel.app', 
-  methods: ['GET', 'POST', 'PUT', 'DEL'],
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-
-const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const morgan = require("morgan");
 app.use(morgan("dev"));
-const database = require("./config/database");
-
+app.use(cors());
 // Importing user model
 const User = require("./models/userModel");
 
