@@ -3,8 +3,17 @@ dotenv.config();
 const express = require("express");
 const app = express();
 app.use(express.json());
+
 const cors = require("cors");
-app.use(cors());
+
+const corsOptions = {
+  origin: 'https://marketplace-frontend-ecru-seven.vercel.app', 
+  methods: ['GET', 'POST', 'PUT', 'DEL'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
